@@ -1,68 +1,72 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; // Import mongoose to define MongoDB schemas and models
 
-const userSchema = new mongoose.Schema ({
-    firstName : {
+// Define the schema for the User model
+const userSchema = new mongoose.Schema({
+    firstName: {
         type: String,
-        required: true
+        required: true // First name is required
+    },
+    lastName: {
+        type: String,
+        required: true // Last name is required
+    },
+    userName: {
+        type: String,
+        required: true // Username is required
     },
     loginID: {
         type: String,
     },
-    lastName : {
+    password: {
         type: String,
-        required: true
+        required: true // Password is required
     },
-    userName : {
+    email: {
         type: String,
-        required: true
+        required: true, // Email is required
+        unique: true // Ensure email is unique across all users
     },
-    password : {
+    phoneNumber: {
         type: String,
-        required: true
+        required: true, // Phone number is required
+        unique: true // Ensure phone number is unique across all users
     },
-    email : {
+    gender: {
         type: String,
-        required: true,
-        unique: true
+        enum: ['Male', 'Female'], // Gender must be either 'Male' or 'Female'
+        required: true // Gender is required
     },
-    phoneNumber : {
+    nationality: {
         type: String,
-        required: true,
-        unique : true
-    },
-    gender : {
-        type: String,
-        enum: ['Male', 'Female',],
-        required: true
-    },
-    nationality : {
-        type: String,
-        required: true
+        required: true // Nationality is required
     },
     followers: {
-        type: [String],
-        count: 0,
-        default : []
+        type: [String], // Array of user IDs representing followers
+        count: 0, // Count field (not stored, but can be used to track dynamically)
+        default: [] // Default empty array for no followers initially
     },
     following: {
-        type: [String],
-        count: 0,
-        default : []
+        type: [String], // Array of user IDs representing users this user is following
+        count: 0, // Count field for dynamic use
+        default: [] // Default empty array for no following initially
     },
     role: {
-        type : String,
-        enum: ['user', 'admin'],
-        default: 'user'
+        type: String,
+        enum: ['user', 'admin'], // Role can be either 'user' or 'admin'
+        default: 'user' // Default role is 'user'
     },
     bio: {
-        type: String,
-        required: false
+        type: String, // Optional biography or description for the user
+        required: false // Bio is not mandatory
     },
     otp: {
-        type: String,
-        default: null,
+        type: String, // One-time password for verification or authentication purposes
+        default: null // Default is null when no OTP is generated
     }
-})
+}, { timestamps: true }); // Add timestamps to record creation and update times automatically
 
-const User = mongoose.model('User', userSchema)
-export default User
+// Create the User model from the schema
+const User = mongoose.model('User', userSchema);
+
+// Export the User model to be used in other parts of the application
+export default User;
