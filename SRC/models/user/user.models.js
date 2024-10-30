@@ -1,5 +1,7 @@
 import mongoose from "mongoose"; // Import mongoose to define MongoDB schemas and models
 
+export const Gender = ['Male', 'Female']
+
 // Define the schema for the User model
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -33,7 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: ['Male', 'Female'], // Gender must be either 'Male' or 'Female'
+        enum: Gender, // Gender must be either 'Male' or 'Female'
         required: true // Gender is required
     },
     nationality: {
@@ -62,6 +64,14 @@ const userSchema = new mongoose.Schema({
     otp: {
         type: String, // One-time password for verification or authentication purposes
         default: null // Default is null when no OTP is generated
+    },
+    isFrozen: {
+        type: Boolean,
+        default: false
+    },
+    falseLogin: {
+        type: Number,
+        default: null
     }
 }, { timestamps: true }); // Add timestamps to record creation and update times automatically
 

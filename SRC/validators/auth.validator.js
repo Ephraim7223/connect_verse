@@ -19,6 +19,6 @@ export const signUpValidator = z.object({
 
 // Validator for user sign-in, ensuring loginID and password are provided
 export const signInValidator = z.object({
-    loginID: z.string(), // Validate loginID (can be email, userName, or phone)
+    email: z.string(), // Validate loginID (can be email, userName, or phone)
     password: z.string() // Validate password as a string (validation checks handled separately during sign-up)
 }).required({ message: 'All fields are required!!!' }); // Both loginID and password are required for sign-in
