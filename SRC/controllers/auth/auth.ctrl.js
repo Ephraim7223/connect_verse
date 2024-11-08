@@ -70,9 +70,7 @@ export const forgetPassword = async() => {
 
 export const resetPassword = async() => {
     try {
-        // if(){
-        //     throw new Error()
-        // }
+        
     } catch (error) {
         
     }
