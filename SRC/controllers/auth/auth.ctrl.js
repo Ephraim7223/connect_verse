@@ -63,7 +63,9 @@ export const Login = async(req, res) => {
 
 export const forgetPassword = async() => {
     try {
-        
+        // if (condition) {
+        //     throw new Error()
+        // }
     } catch (error) {
         
     }
