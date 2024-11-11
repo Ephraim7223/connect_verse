@@ -1,6 +1,6 @@
 import User from "../../models/user/user.models.js"
 import { formatZodError } from "../../utils/errors.js"
-import { comparePassword, hashValue } from "../../utils/globalFn.js"
+import { comparePassword, generateToken, hashValue } from "../../utils/globalFn.js"
 import { signInValidator, signUpValidator } from "../../validators/auth.validator.js"
 
 export const Register = async(req, res) => {
@@ -52,8 +52,9 @@ export const Login = async(req, res) => {
     if (!comparePw) {
         return res.status(400).json({message: "Password does not match"})
     }
+    const accessToken = generateToken(user._id)
     console.log('User logged in successfully');
-    res.status(200).json({message: 'User loggen in successfully', user})
+    res.status(200).json({message: 'User logged in successfully', accessToken})
     } catch (error) {
         console.log(error);
         res.status(500).json({message: error.message})
