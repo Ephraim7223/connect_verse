@@ -1,4 +1,5 @@
 import User from "../../models/user/user.models.js"
+import { registrationMail } from "../../utils/auth.template.js"
 import { formatZodError } from "../../utils/errors.js"
 import { comparePassword, generateToken, hashValue } from "../../utils/globalFn.js"
 import { signInValidator, signUpValidator } from "../../validators/auth.validator.js"
@@ -26,6 +27,7 @@ export const Register = async(req, res) => {
             phoneNumber,
             email
         })
+        await registrationMail(newUser.email, newUser.userName)
         await newUser.save()
 
         res.status(200).json({message: 'User created successfully', newUser})
