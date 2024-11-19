@@ -18,7 +18,6 @@ export const registrationMail = async (email, userName) => {
 
     const template = mailGenerator.generate(html)
 
-    // Debug: Check if template is generated correctly
     if (!template) {
         console.log("Failed to generate HTML template");
         return;
@@ -26,11 +25,11 @@ export const registrationMail = async (email, userName) => {
 
     const mail = {
         to: email,
-        subject: 'Successful registration',
         from: 'ephraimjerome81@gmail.com',
+        subject: 'Successful registration',
         html: template
     }
 
-    // Send mail using mailTransport
+    // Send mail using mailTransport - fixed parameter order
     return mailTransport(mail.to, mail.from, mail.subject, mail.html)
 }

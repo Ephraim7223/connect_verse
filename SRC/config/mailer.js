@@ -30,14 +30,18 @@ const smtpTransport = createTransport({
     }
 })
 
-export const mailTransport = async(to, subject ,html,) => {
-    const from  = GMAIL_NAME
+export const mailTransport = async(to, from, subject, html) => {
     console.log(`sending mail to: ${to}`);
     
-    const mailOptions = {to, subject ,html, from}
+    const mailOptions = {
+        to,
+        from,
+        subject,
+        html
+    }
 
     return new Promise((resolve, reject) => {
-        smtpTransport.sendMail(mailOptions,(err, info) => {
+        smtpTransport.sendMail(mailOptions, (err, info) => {
             if (err) {
                 return reject(err)
             }
